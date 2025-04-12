@@ -2,64 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Video Player with Seek Bar</title>
+  <title>Video Filter with Checkboxes</title>
   <style>
     body {
-      background: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      color: #fff;
-      font-family: sans-serif;
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      padding: 20px;
+    }
+
+    .checkbox-group {
+      margin-bottom: 20px;
+    }
+
+    .checkbox-group label {
+      margin-right: 15px;
     }
 
     .video-container {
-      max-width: 400px;
-      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .video-box {
+      display: none;
+      flex: 1 1 300px;
     }
 
     video {
       width: 100%;
       border-radius: 12px;
     }
-
-    .controls {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    input[type="range"] {
-      width: 100%;
-      accent-color: red;
-    }
   </style>
 </head>
 <body>
-  <div class="video-container">
-    <video id="video" src="MARGO_4b_c.mov" controls></video>
-    <div class="controls">
-      <input type="range" id="seekBar" value="0" step="0.1">
-    </div>
+
+  <h2>Select Videos to Display</h2>
+
+  <div class="checkbox-group">
+    <label><input type="checkbox" class="video-checkbox" value="Nature"> Video 1</label>
+    <label><input type="checkbox" class="video-checkbox" value="Human Face"> Video 2</label>
+    <label><input type="checkbox" class="video-checkbox" value="Action"> Video 3</label>
   </div>
-
-  <script>
-    const video = document.getElementById('video');
-    const seekBar = document.getElementById('seekBar');
-
-    // Update seek bar as video plays
-    video.addEventListener('timeupdate', () => {
-      seekBar.max = video.duration;
-      seekBar.value = video.currentTime;
-    });
-
-    // Seek video when seek bar is changed
-    seekBar.addEventListener('input', () => {
-      video.currentTime = seekBar.value;
-    });
-  </script>
-</body>
-</html>
