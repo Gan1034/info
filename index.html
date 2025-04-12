@@ -65,3 +65,21 @@
     </video>
   </div>
 </div>
+
+  <script>
+  const checkboxes = document.querySelectorAll('.video-checkbox');
+  const videos = document.querySelectorAll('.video-box');
+
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+      const value = checkbox.value;
+      const videoBox = document.querySelector(`.video-box[data-video="${value}"]`);
+
+      if (checkbox.checked) {
+        videoBox.style.display = 'block';
+      } else {
+        videoBox.style.display = 'none';
+      }
+    });
+  });
+</script>
