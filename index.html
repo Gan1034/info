@@ -66,12 +66,12 @@
   </div>
 </div>
 
-  <script>
+<script>
   const checkboxes = document.querySelectorAll('.video-checkbox');
   const videos = document.querySelectorAll('.video-box');
 
-  checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', () => {
+  function updateVideoDisplay() {
+    checkboxes.forEach(checkbox => {
       const value = checkbox.value;
       const videoBox = document.querySelector(`.video-box[data-video="${value}"]`);
 
@@ -81,5 +81,15 @@
         videoBox.style.display = 'none';
       }
     });
+
+    // Limit to maximum 2 checkboxes
+    const checkedCount = document.querySelectorAll('.video-checkbox:checked').length;
+    checkboxes.forEach(cb => {
+      cb.disabled = !cb.checked && checkedCount >= 2;
+    });
+  }
+
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', updateVideoDisplay);
   });
 </script>
