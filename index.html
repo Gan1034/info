@@ -1,12 +1,92 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Video Example</title>
-</head>
-<body>
-  <h1>My Video</h1>
-  <video id="videoPlayer" controls width="640">
-    <source src="MARGO_4b_c.mp4" type="video/mp4">
-  </video>
-</body>
-</html>
+import cv2
+import tkinter as tk
+from tkinter import ttk
+from PIL import Image, ImageTk
+import threading
+import time
+
+class VideoPlayer:
+    def __init__(self, root, video_path):
+        self.root = root
+        self.cap = cv2.VideoCapture(video_path)
+        if not self.cap.isOpened():
+            raise ValueError("Cannot open video file.")
+
+        self.total_frames = int(self.cap.get(cv2.CAP_PROP_FRAME_COUNT))
+        self.fps = self.cap.get(cv2.CAP_PROP_FPS)
+        self.duration = self.total_frames / self.fps
+        self.playing = False
+        self.current_frame = 0
+
+        self.create_widgets()
+        self.update_frame()
+
+    def create_widgets(self):
+        self.video_label = tk.Label(self.root)
+        self.video_label.pack()
+
+        self.controls = tk.Frame(self.root)
+        self.controls.pack(fill="x")
+
+        self.play_button = ttk.Button(self.controls, text="Play", command=self.toggle_play)
+        self.play_button.pack(side="left", padx=5)
+
+        self.timestamp = tk.Label(self.controls, text="00:00 / 00:00")
+        self.timestamp.pack(side="right", padx=5)
+
+        self.slider = ttk.Scale(self.controls, from_=0, to=self.total_frames - 1,
+                                orient="horizontal", command=self.on_slider)
+        self.slider.pack(fill="x", expand=True, padx=10)
+
+    def toggle_play(self):
+        self.playing = not self.playing
+        self.play_button.config(text="Pause" if self.playing else "Play")
+        if self.playing:
+            threading.Thread(target=self.play_video, daemon=True).start()
+
+    def on_slider(self, val):
+        self.current_frame = int(float(val))
+        self.cap.set(cv2.CAP_PROP_POS_FRAMES, self.current_frame)
+        ret, frame = self.cap.read()
+        if ret:
+            self.show_frame(frame)
+        self.update_timestamp()
+
+    def update_frame(self):
+        self.on_slider(self.current_frame)
+        self.root.after(100, self.update_frame)
+
+    def play_video(self):
+        while self.playing and self.cap.isOpened():
+            ret, frame = self.cap.read()
+            if not ret:
+                break
+            self.current_frame += 1
+            self.slider.set(self.current_frame)
+            self.show_frame(frame)
+            self.update_timestamp()
+            time.sleep(1 / self.fps)
+
+    def show_frame(self, frame):
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        img = Image.fromarray(frame)
+        imgtk = ImageTk.PhotoImage(image=img)
+        self.video_label.imgtk = imgtk
+        self.video_label.configure(image=imgtk)
+
+    def update_timestamp(self):
+        current_time = self.current_frame / self.fps
+        def format_time(t):
+            minutes = int(t // 60)
+            seconds = int(t % 60)
+            return f"{minutes:02}:{seconds:02}"
+        self.timestamp.config(text=f"{format_time(current_time)} / {format_time(self.duration)}")
+
+# Replace with your own video file
+video_path = "MARGO_4b_c.mov"
+
+root = tk.Tk()
+root.title("Python Video Player")
+VideoPlayer(root, video_path)
+root.mainloop()
+
