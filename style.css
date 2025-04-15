@@ -41,5 +41,13 @@ img {
   height: 100%;
   object-fit: cover;
 }
+
+.active-slide {
+  position: absolute;
+  top: 60px;
+  left: 40px;
+  font-family: "PP Supply Sans";
+  font-size: 15px;
+}
   
 
