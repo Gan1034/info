@@ -42,7 +42,7 @@
       const sliderWrapper = document.querySelector(".slider-wrapper");
       const activeSlide = document.querySelector(".active-slide");
 
-      let maxScroll = slideWrapper.offsetWidth - window.innerWidth;
+      let maxScroll = sliderWrapper.offsetWidth - window.innerWidth;
 
       function lerp(start, end, factor) {
         return start + (end - start)*factor;
