@@ -1,95 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Video Filter with Checkboxes</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f0f0f0;
-      padding: 20px;
-    }
-
-    .checkbox-group {
-      margin-bottom: 20px;
-    }
-
-    .checkbox-group label {
-      margin-right: 15px;
-    }
-
-    .video-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .video-box {
-      display: none;
-      flex: 1 1 300px;
-    }
-
-    video {
-      width: 100%;
-      border-radius: 12px;
-    }
-  </style>
-</head>
-<body>
-
-  <h2>Select Videos to Display (Maximum of 2)</h2>
-
-  <div class="checkbox-group">
-    <label><input type="checkbox" class="video-checkbox" value="Video 1"> Human Face</label>
-    <label><input type="checkbox" class="video-checkbox" value="Video 2"> Long Take</label>
-    <label><input type="checkbox" class="video-checkbox" value="Video 3"> Low Light</label>
-  </div>
-
-  <div class="video-container">
-  <div class="video-box" data-video="Video 1">
-    <video controls>
-      <source src="ADVEN_9a_c.mov" type="video/mp4">
-    
-    </video>
-  </div>
-  <div class="video-box" data-video="Video 2">
-    <video controls>
-      <source src="AMAZI_2a_c.mov" type="video/mp4">
-     
-    </video>
-  </div>
-  <div class="video-box" data-video="Video 3">
-    <video controls>
-      <source src=MARGO_4b_c.mov" type="video/mp4">
-     
-    </video>
-  </div>
-</div>
-
-<script>
-  const checkboxes = document.querySelectorAll('.video-checkbox');
-  const videos = document.querySelectorAll('.video-box');
-
-  function updateVideoDisplay() {
-    checkboxes.forEach(checkbox => {
-      const value = checkbox.value;
-      const videoBox = document.querySelector(`.video-box[data-video="${value}"]`);
-
-      if (checkbox.checked) {
-        videoBox.style.display = 'block';
-      } else {
-        videoBox.style.display = 'none';
-      }
-    });
-
-    // Limit to maximum 2 checkboxes
-    const checkedCount = document.querySelectorAll('.video-checkbox:checked').length;
-    checkboxes.forEach(cb => {
-      cb.disabled = !cb.checked && checkedCount >= 2;
-    });
-  }
-
-  checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', updateVideoDisplay);
-  });
-</script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Infinite Image Scroll</title>
+    <link rel="stylesheet" href="styles.css" />
+  <head>
+  <body>
+    <nav>
+    <div class="slider">
+       <div class=silder-wrapper">
+         <img src="image" alt="">
+       </div>
+       <div class=silder-wrapper">
+         <img src="image" alt="">
+       </div>
+       <div class=silder-wrapper">
+         <img src="image" alt="">
+       </div>
+       <div class=silder-wrapper">
+         <img src="image" alt="">
+       </div>
+       <div class=silder-wrapper">
+         <img src="image" alt="">
+       </div>
+       <div class=silder-wrapper">
+         <img src="image" alt="">
+       </div>
+       <div class=silder-wrapper">
+         <img src="image" alt="">
+       </div>
+      </div>
+    </div>
+    </nav>
+    <script src="web"/script>
+    <script></script>
+  </body>
+</html>
