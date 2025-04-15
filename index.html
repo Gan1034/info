@@ -40,7 +40,6 @@
 
       const slider = document.querySelector(".slider);
       const sliderWrapper = document.querySelector(".slider-wrapper");
-      const activeSlide = document.querySelector(".active-slide");
 
       let maxScroll = sliderWrapper.offsetWidth - window.innerWidth;
 
@@ -55,7 +54,7 @@
           x: -current,
         });
 
-        let moveRatio = current  maxScroll;
+        let moveRatio = current / maxScroll;
 
         requestAnimationFrame(update);
       }
