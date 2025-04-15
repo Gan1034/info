@@ -1,14 +1,11 @@
-.video-box {
-  display: none;
-  flex: 1 1 calc(50% - 20px); /* Two videos per row */
+  {
+  margin: 0;
+  padding: 0;
+  box-sizing:border-box;
 }
-
-video {
-  width: 100%;
-  aspect-ratio: 16 / 9; /* Keeps 2560x1440 ratio */
-  max-width: 100%;
-  border-radius: 12px;
-  object-fit: cover;
+html, 
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
-
-
