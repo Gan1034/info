@@ -9,3 +9,37 @@ body {
   height: 100vh;
   overflow: hidden;
 }
+
+nav > div {
+  display: flex;
+  gap: 50px;
+}
+
+.slider {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.slider-wrapper {
+  width: max-content;
+  padding: 0 150px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 100px;
+}
+
+.slider {
+  width: 500px;
+  height: 500px;
+  background: gray;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+  
+
